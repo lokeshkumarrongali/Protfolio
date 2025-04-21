@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lokesh's Certifications Timeline</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: #1e90ff;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+
+    .container {
+      padding: 20px 30px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+    }
+
+    .container.left {
+      left: 0;
+    }
+
+    .container.right {
+      left: 50%;
+    }
+
+    .container::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -13px;
+      background-color: white;
+      border: 4px solid #1e90ff;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .right::after {
+      left: -13px;
+    }
+
+    .content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 6px;
+      position: relative;
+    }
+
+    .content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .date {
+      font-size: 14px;
+      color: gray;
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .container.right {
+        left: 0%;
+      }
+
+      .timeline::after {
+        left: 31px;
+      }
+
+      .container::after, .right::after {
+        left: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lokesh Kumar Rongali's Certification Timeline</h1>
+
+  <div class="timeline">
+
+    <div class="container left">
+      <div class="content">
+        <h2>Kotlin for Android Developers</h2>
+        <p class="date">Jul 2024</p>
+        <img src="assets/img/certs/kotlin_android.png" alt="Kotlin Android Certificate">
+        <p>Mastered Android app development using Kotlin with hands-on projects.</p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>Mathematics for Machine Learning</h2>
+        <p class="date">Aug 2024</p>
+        <img src="assets/img/certs/Mathml.png" alt="Math ML Certificate">
+        <p>Strengthened linear algebra, probability, and statistics for ML foundations.</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>Data Science Foundations</h2>
+        <p class="date">Sep 2024</p>
+        <img src="assets/img/certs/datasi.png" alt="DS Certificate">
+        <p>Covered core principles of data analysis and data science pipelines.</p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>Dynamic Programming</h2>
+        <p class="date">Jan 2024</p>
+        <img src="assets/img/certs/dyna.png" alt="DP Certificate">
+        <p>Learned to solve complex problems using recursion and memoization.</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>Greedy Algorithms</h2>
+        <p class="date">Jan 2024</p>
+        <img src="assets/img/certs/dyna.png" alt="Greedy Certificate">
+        <p>Explored optimal substructure problems using greedy strategies.</p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>Software Testing (NPTEL)</h2>
+        <p class="date">Nov 2024</p>
+        <img src="assets/img/certs/softwaretest.png" alt="Testing Certificate">
+        <p>Covered white-box, black-box, and integration testing techniques.</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>Programming Fundamentals in Kotlin</h2>
+        <p class="date">Sep 2024</p>
+        <img src="assets/img/certs/kotlin_android.png" alt="Kotlin Fundamentals">
+        <p>Gained strong programming basics using Kotlin with real-world examples.</p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>Build AI Apps with ChatGPT & GPT-4</h2>
+        <p class="date">Jul 2024</p>
+        <img src="assets/img/certs/dyna.png" alt="AI App Certificate">
+        <p>Developed AI-powered applications using ChatGPT, DALL·E, and GPT APIs.</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>Supervised ML: Regression & Classification</h2>
+        <p class="date">Dec 2024</p>
+        <img src="assets/img/certs/datasi.png" alt="ML Certificate">
+        <p>Learned regression models, classifiers, and ML pipelines for predictions.</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
