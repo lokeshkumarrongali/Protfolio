@@ -2,195 +2,552 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lokesh's Certifications Timeline</title>
   <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2980b9;
+      --accent-color: #e74c3c;
+      --light-bg: #f8f9fa;
+      --dark-bg: #2c3e50;
+      --text-color: #333;
+      --light-text: #f8f9fa;
+      --border-radius: 12px;
+      --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 40px 20px;
     }
-
-    h1 {
+    
+    header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
+      padding: 20px;
+      position: relative;
     }
-
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--dark-bg);
+      position: relative;
+      display: inline-block;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 4px;
+      background: var(--primary-color);
+      bottom: -10px;
+      left: 20%;
+      border-radius: 2px;
+    }
+    
+    .header-subtitle {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      background: white;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 8px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary-color);
+      color: white;
+    }
+    
     .timeline {
       position: relative;
-      max-width: 900px;
-      margin: auto;
+      max-width: 1200px;
+      margin: 50px auto;
     }
-
+    
     .timeline::after {
       content: '';
       position: absolute;
       width: 6px;
-      background-color: #1e90ff;
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
       top: 0;
       bottom: 0;
       left: 50%;
       margin-left: -3px;
+      border-radius: 10px;
     }
-
+    
     .container {
-      padding: 20px 30px;
+      padding: 15px 40px;
       position: relative;
-      background-color: inherit;
+      background-color: transparent;
       width: 50%;
+      animation: fadeIn 0.6s ease-out;
     }
-
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
     .container.left {
       left: 0;
     }
-
+    
     .container.right {
       left: 50%;
     }
-
+    
     .container::after {
       content: "";
       position: absolute;
-      width: 25px;
-      height: 25px;
-      right: -13px;
+      width: 28px;
+      height: 28px;
+      right: -14px;
       background-color: white;
-      border: 4px solid #1e90ff;
-      top: 15px;
+      border: 4px solid var(--primary-color);
+      top: 22px;
       border-radius: 50%;
       z-index: 1;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
     }
-
+    
+    .container:hover::after {
+      background-color: var(--primary-color);
+      transform: scale(1.1);
+    }
+    
     .right::after {
-      left: -13px;
+      left: -14px;
     }
-
+    
     .content {
       background-color: white;
-      padding: 20px;
-      border-radius: 6px;
+      padding: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
       position: relative;
+      transition: var(--transition);
     }
-
-    .content img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
+    
+    .content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
     }
-
+    
+    .container.left .content {
+      border-left: 5px solid var(--primary-color);
+    }
+    
+    .container.right .content {
+      border-right: 5px solid var(--secondary-color);
+    }
+    
+    .cert-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    
+    .cert-title {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+      color: var(--dark-bg);
+    }
+    
+    .cert-category {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      background-color: #e8f4fc;
+      color: var(--primary-color);
+    }
+    
     .date {
-      font-size: 14px;
-      color: gray;
+      font-size: 0.9rem;
+      color: #777;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
     }
-
+    
+    .date::before {
+      content: '📅';
+      margin-right: 5px;
+    }
+    
+    .cert-img-container {
+      position: relative;
+      margin: 15px 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+    
+    .content img {
+      width: 100%;
+      display: block;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      object-fit: cover;
+    }
+    
+    .content img:hover {
+      transform: scale(1.03);
+    }
+    
+    .cert-desc {
+      margin-top: 15px;
+      line-height: 1.5;
+    }
+    
+    .view-cert {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 15px;
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    .view-cert::after {
+      content: '→';
+      margin-left: 5px;
+      transition: var(--transition);
+    }
+    
+    .view-cert:hover::after {
+      transform: translateX(4px);
+    }
+    
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin: 50px auto;
+      max-width: 900px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    .stat-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 25px;
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+      transition: var(--transition);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+    
+    .stat-label {
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      color: #666;
+      padding: 20px;
+    }
+    
     @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+      
       .container {
         width: 100%;
         padding-left: 70px;
         padding-right: 25px;
       }
-
+      
       .container.right {
-        left: 0%;
+        left: 0;
       }
-
-      .timeline::after {
-        left: 31px;
-      }
-
-      .container::after, .right::after {
+      
+      .container.left::after, .container.right::after {
         left: 18px;
+      }
+      
+      .container.left .content, .container.right .content {
+        border-left: 5px solid var(--primary-color);
+        border-right: none;
+      }
+      
+      .filters {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .stats {
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
 
-  <h1>Lokesh Kumar Rongali's Certification Timeline</h1>
+  <header>
+    <h1>Lokesh Kumar Rongali's Certification Journey</h1>
+    <p class="header-subtitle">A visual timeline showcasing professional development and continuous learning in technology</p>
+  </header>
+  
+  <div class="filters">
+    <button class="filter-btn active">All Certifications</button>
+    <button class="filter-btn">Programming</button>
+    <button class="filter-btn">Machine Learning</button>
+    <button class="filter-btn">Software Engineering</button>
+    <button class="filter-btn">2024</button>
+  </div>
+  
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-number">9</div>
+      <div class="stat-label">Certifications</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">4</div>
+      <div class="stat-label">Tech Categories</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">2024</div>
+      <div class="stat-label">Latest Year</div>
+    </div>
+  </div>
 
   <div class="timeline">
 
     <div class="container left">
       <div class="content">
-        <h2>Kotlin for Android Developers</h2>
-        <p class="date">Jul 2024</p>
-        <img src="assets/img/kotlin_android.png" alt="Kotlin Android Certificate">
-        <p>Mastered Android app development using Kotlin with hands-on projects.</p>
+        <div class="cert-header">
+          <div>
+            <h2 class="cert-title">Kotlin for Android Developers</h2>
+            <span class="cert-category">Programming</span>
+          </div>
+          <p class="date">Jul 2024</p>
+        </div>
+        <div class="cert-img-container">
+          <img src="assets/img/kotlin_android.png" alt="Kotlin Android Certificate">
+        </div>
+        <p class="cert-desc">Mastered Android app development using Kotlin with hands-on projects building real-world applications with modern architecture patterns.</p>
+        <a href="#" class="view-cert">View Certificate</a>
       </div>
     </div>
 
     <div class="container right">
       <div class="content">
-        <h2>Mathematics for Machine Learning</h2>
-        <p class="date">Aug 2024</p>
-        <img src="assets/img/Mathml.png" alt="Math ML Certificate">
-        <p>Strengthened linear algebra, probability, and statistics for ML foundations.</p>
+        <div class="cert-header">
+          <div>
+            <h2 class="cert-title">Mathematics for Machine Learning</h2>
+            <span class="cert-category">Machine Learning</span>
+          </div>
+          <p class="date">Aug 2024</p>
+        </div>
+        <div class="cert-img-container">
+          <img src="assets/img/Mathml.png" alt="Math ML Certificate">
+        </div>
+        <p class="cert-desc">Strengthened foundations in linear algebra, probability theory, and statistics required for advanced machine learning applications.</p>
+        <a href="#" class="view-cert">View Certificate</a>
       </div>
     </div>
 
     <div class="container left">
       <div class="content">
-        <h2>Data Science Foundations</h2>
-        <p class="date">Sep 2024</p>
-        <img src="assets/img/datasi.png" alt="DS Certificate">
-        <p>Covered core principles of data analysis and data science pipelines.</p>
+        <div class="cert-header">
+          <div>
+            <h2 class="cert-title">Data Science Foundations</h2>
+            <span class="cert-category">Machine Learning</span>
+          </div>
+          <p class="date">Sep 2024</p>
+        </div>
+        <div class="cert-img-container">
+          <img src="assets/img/datasi.png" alt="DS Certificate">
+        </div>
+        <p class="cert-desc">Covered core principles of data analysis, visualization techniques, and end-to-end data science pipelines for solving real-world problems.</p>
+        <a href="#" class="view-cert">View Certificate</a>
       </div>
     </div>
 
     <div class="container right">
       <div class="content">
-        <h2>Dynamic Programming</h2>
-        <p class="date">Jan 2024</p>
-        <img src="assets/img/dyna.png" alt="DP Certificate">
-        <p>Learned to solve complex problems using recursion and memoization.</p>
+        <div class="cert-header">
+          <div>
+            <h2 class="cert-title">Dynamic Programming</h2>
+            <span class="cert-category">Algorithms</span>
+          </div>
+          <p class="date">Jan 2024</p>
+        </div>
+        <div class="cert-img-container">
+          <img src="assets/img/dyna.png" alt="DP Certificate">
+        </div>
+        <p class="cert-desc">Learned to solve complex algorithmic problems using recursion, memoization, and bottom-up tabulation approaches.</p>
+        <a href="#" class="view-cert">View Certificate</a>
       </div>
     </div>
 
     <div class="container left">
       <div class="content">
-        <h2>Greedy Algorithms</h2>
-        <p class="date">Jan 2024</p>
-        <img src="assets/img/dyna.png" alt="Greedy Certificate">
-        <p>Explored optimal substructure problems using greedy strategies.</p>
+        <div class="cert-header">
+          <div>
+            <h2 class="cert-title">Greedy Algorithms</h2>
+            <span class="cert-category">Algorithms</span>
+          </div>
+          <p class="date">Jan 2024</p>
+        </div>
+        <div class="cert-img-container">
+          <img src="assets/img/dyna.png" alt="Greedy Certificate">
+        </div>
+        <p class="cert-desc">Explored optimal substructure problems using greedy strategies for efficient problem-solving in algorithmic design.</p>
+        <a href="#" class="view-cert">View Certificate</a>
       </div>
     </div>
 
     <div class="container right">
       <div class="content">
-        <h2>Software Testing (NPTEL)</h2>
-        <p class="date">Nov 2024</p>
-        <img src="assets/img/softwaretest.png" alt="Testing Certificate">
-        <p>Covered white-box, black-box, and integration testing techniques.</p>
+        <div class="cert-header">
+          <div>
+            <h2 class="cert-title">Software Testing (NPTEL)</h2>
+            <span class="cert-category">Software Engineering</span>
+          </div>
+          <p class="date">Nov 2024</p>
+        </div>
+        <div class="cert-img-container">
+          <img src="assets/img/softwaretest.png" alt="Testing Certificate">
+        </div>
+        <p class="cert-desc">Covered white-box, black-box, and integration testing techniques with practical approaches to software quality assurance.</p>
+        <a href="#" class="view-cert">View Certificate</a>
       </div>
     </div>
 
     <div class="container left">
       <div class="content">
-        <h2>Programming Fundamentals in Kotlin</h2>
-        <p class="date">Sep 2024</p>
-        <img src="assets/img/kotlin_android.png" alt="Kotlin Fundamentals">
-        <p>Gained strong programming basics using Kotlin with real-world examples.</p>
+        <div class="cert-header">
+          <div>
+            <h2 class="cert-title">Programming Fundamentals in Kotlin</h2>
+            <span class="cert-category">Programming</span>
+          </div>
+          <p class="date">Sep 2024</p>
+        </div>
+        <div class="cert-img-container">
+          <img src="assets/img/kotlin_android.png" alt="Kotlin Fundamentals">
+        </div>
+        <p class="cert-desc">Gained strong programming foundations using Kotlin with real-world examples and functional programming techniques.</p>
+        <a href="#" class="view-cert">View Certificate</a>
       </div>
     </div>
 
     <div class="container right">
       <div class="content">
-        <h2>Build AI Apps with ChatGPT & GPT-4</h2>
-        <p class="date">Jul 2024</p>
-        <img src="assets/img/dyna.png" alt="AI App Certificate">
-        <p>Developed AI-powered applications using ChatGPT, DALL·E, and GPT APIs.</p>
+        <div class="cert-header">
+          <div>
+            <h2 class="cert-title">Build AI Apps with ChatGPT & GPT-4</h2>
+            <span class="cert-category">Artificial Intelligence</span>
+          </div>
+          <p class="date">Jul 2024</p>
+        </div>
+        <div class="cert-img-container">
+          <img src="assets/img/kotlin_android.png" alt="AI App Certificate">
+        </div>
+        <p class="cert-desc">Developed AI-powered applications using ChatGPT, DALL·E, and GPT APIs with practical implementation strategies.</p>
+        <a href="#" class="view-cert">View Certificate</a>
       </div>
     </div>
 
     <div class="container left">
       <div class="content">
-        <h2>Supervised ML: Regression & Classification</h2>
-        <p class="date">Dec 2024</p>
-        <img src="assets/img/datasi.png" alt="ML Certificate">
-        <p>Learned regression models, classifiers, and ML pipelines for predictions.</p>
+        <div class="cert-header">
+          <div>
+            <h2 class="cert-title">Supervised ML: Regression & Classification</h2>
+            <span class="cert-category">Machine Learning</span>
+          </div>
+          <p class="date">Dec 2024</p>
+        </div>
+        <div class="cert-img-container">
+          <img src="assets/img/softwaretest.png" alt="ML Certificate">
+        </div>
+        <p class="cert-desc">Learned regression models, classifiers, and ML pipelines for predictive analytics with practical applications.</p>
+        <a href="#" class="view-cert">View Certificate</a>
       </div>
     </div>
 
   </div>
+
+  <footer>
+    <p>© 2025 Lokesh Kumar Rongali - Professional Portfolio</p>
+  </footer>
+
+  <script>
+    // Basic filtering functionality (note: this is just UI demonstration)
+    document.querySelectorAll('.filter-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        // Simulated filtering animation
+        const containers = document.querySelectorAll('.container');
+        containers.forEach(container => {
+          container.style.opacity = '0';
+          container.style.transform = 'translateY(20px)';
+          
+          setTimeout(() => {
+            container.style.opacity = '1';
+            container.style.transform = 'translateY(0)';
+          }, 300);
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
